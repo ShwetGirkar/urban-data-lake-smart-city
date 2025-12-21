@@ -2,7 +2,6 @@ import os
 import requests
 from dotenv import load_dotenv
 from utils import ensure_dir, save_json, append_csv, utc_now
-import pandas as pd
 
 load_dotenv()
 
