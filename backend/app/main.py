@@ -1,10 +1,25 @@
-from fastapi import FastAPI
-from app.routes import city_routes, summary_routes
+from dotenv import load_dotenv
 
+# import os
+from fastapi import FastAPI
+from app.routes import (
+    city_routes,
+    summary_routes,
+    alerts_routes,
+    air_quality_routes,
+    traffic_routes,
+    search_routes,
+)
+
+load_dotenv()
 app = FastAPI(title="Urban Data Lake API")
 
 app.include_router(city_routes.router)
 app.include_router(summary_routes.router)
+app.include_router(alerts_routes.router)
+app.include_router(air_quality_routes.router)
+app.include_router(traffic_routes.router)
+app.include_router(search_routes.router)
 
 
 @app.get("/")

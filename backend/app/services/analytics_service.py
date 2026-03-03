@@ -50,3 +50,70 @@ def compute_summary(df):
         "worst_city": worst_city,
         "last_updated": last_updated,
     }
+
+
+def generate_alerts(df):
+    df = enrich_city_data(df)
+    alerts = []
+
+    for _, row in df.iterrows():
+        city = row["city"]
+        timestamp = row["timestamp_weather"]
+
+        # AQI Alerts
+        if row["aqi"] > 200:
+            alerts.append(
+                {
+                    "level": "High",
+                    "type": "AQI",
+                    "city": city,
+                    "message": f"AQI above 200 (Current: {row['aqi']})",
+                    "time": timestamp,
+                }
+            )
+        elif row["aqi"] > 100:
+            alerts.append(
+                {
+                    "level": "Medium",
+                    "type": "AQI",
+                    "city": city,
+                    "message": f"AQI elevated (Current: {row['aqi']})",
+                    "time": timestamp,
+                }
+            )
+
+        # Traffic Alerts
+        if row["congestion_ratio"] < 0.4:
+            alerts.append(
+                {
+                    "level": "High",
+                    "type": "Traffic",
+                    "city": city,
+                    "message": "Severe congestion detected",
+                    "time": timestamp,
+                }
+            )
+        elif row["congestion_ratio"] < 0.6:
+            alerts.append(
+                {
+                    "level": "Medium",
+                    "type": "Traffic",
+                    "city": city,
+                    "message": "Moderate congestion detected",
+                    "time": timestamp,
+                }
+            )
+
+        # Weather Alerts
+        if row["wind_speed_mps"] > 10:
+            alerts.append(
+                {
+                    "level": "High",
+                    "type": "Weather",
+                    "city": city,
+                    "message": f"High wind speed ({row['wind_speed_mps']} m/s)",
+                    "time": timestamp,
+                }
+            )
+
+    return alerts
