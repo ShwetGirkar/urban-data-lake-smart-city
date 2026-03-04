@@ -9,6 +9,7 @@ from app.routes import (
     air_quality_routes,
     traffic_routes,
     search_routes,
+    prediction_routes,
 )
 
 load_dotenv()
@@ -20,6 +21,7 @@ app.include_router(alerts_routes.router)
 app.include_router(air_quality_routes.router)
 app.include_router(traffic_routes.router)
 app.include_router(search_routes.router)
+app.include_router(prediction_routes.router)
 
 
 @app.get("/")
