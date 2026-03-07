@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 # import os
 from fastapi import FastAPI
@@ -14,6 +15,14 @@ from app.routes import (
 
 load_dotenv()
 app = FastAPI(title="Urban Data Lake API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow frontend requests
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(city_routes.router)
 app.include_router(summary_routes.router)

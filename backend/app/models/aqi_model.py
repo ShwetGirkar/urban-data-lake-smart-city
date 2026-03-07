@@ -36,20 +36,18 @@ def predict_aqi_alert(city_name: str):
 
     predicted_aqi = int(latest_aqi + trend)
 
-    if predicted_aqi <= 50:
+    if predicted_aqi == 1:
         risk = "Good"
-    elif predicted_aqi <= 100:
-        risk = "Satisfactory"
-    elif predicted_aqi <= 200:
+    elif predicted_aqi == 2:
+        risk = "Fair"
+    elif predicted_aqi == 3:
         risk = "Moderate"
-    elif predicted_aqi <= 300:
+    elif predicted_aqi == 4:
         risk = "Poor"
-    elif predicted_aqi <= 400:
-        risk = "Very Poor"
     else:
-        risk = "Severe"
+        risk = "Very Poor"
 
-    if predicted_aqi > 200:
+    if predicted_aqi >= 4:
         alert = "High Pollution Risk"
     else:
         alert = "Normal"

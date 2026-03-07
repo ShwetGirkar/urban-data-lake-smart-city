@@ -26,18 +26,16 @@ def get_air_quality_by_city(city_name: str):
     # Risk classification
     aqi_value = int(latest_row["aqi"])  # ← convert to normal int
 
-    if aqi_value <= 50:
+    if aqi_value == 1:
         risk = "Good"
-    elif aqi_value <= 100:
-        risk = "Satisfactory"
-    elif aqi_value <= 200:
+    elif aqi_value == 2:
+        risk = "Fair"
+    elif aqi_value == 3:
         risk = "Moderate"
-    elif aqi_value <= 300:
+    elif aqi_value == 4:
         risk = "Poor"
-    elif aqi_value <= 400:
-        risk = "Very Poor"
     else:
-        risk = "Severe"
+        risk = "Very Poor"
 
     # Convert trend values to proper Python types
     trend = city_df[["timestamp", "aqi", "pm25"]].copy()

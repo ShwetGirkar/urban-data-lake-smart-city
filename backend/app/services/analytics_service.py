@@ -13,18 +13,16 @@ def enrich_city_data(df):
 
     # Risk classification
     def classify(aqi):
-        if aqi <= 50:
+        if aqi == 1:
             return "Good"
-        elif aqi <= 100:
-            return "Satisfactory"
-        elif aqi <= 200:
+        elif aqi == 2:
+            return "Fair"
+        elif aqi == 3:
             return "Moderate"
-        elif aqi <= 300:
+        elif aqi == 4:
             return "Poor"
-        elif aqi <= 400:
-            return "Very Poor"
         else:
-            return "Severe"
+            return "Very Poor"
 
     df["risk_level"] = df["aqi"].apply(classify)
 
@@ -61,23 +59,24 @@ def generate_alerts(df):
         timestamp = row["timestamp_weather"]
 
         # AQI Alerts
-        if row["aqi"] > 200:
+        if row["aqi"] >= 5:
             alerts.append(
                 {
                     "level": "High",
                     "type": "AQI",
                     "city": city,
-                    "message": f"AQI above 200 (Current: {row['aqi']})",
+                    "message": f"Very Poor Air Quality (AQI: {row['aqi']})",
                     "time": timestamp,
                 }
             )
-        elif row["aqi"] > 100:
+
+        elif row["aqi"] >= 4:
             alerts.append(
                 {
                     "level": "Medium",
                     "type": "AQI",
                     "city": city,
-                    "message": f"AQI elevated (Current: {row['aqi']})",
+                    "message": f"Poor Air Quality (AQI: {row['aqi']})",
                     "time": timestamp,
                 }
             )
