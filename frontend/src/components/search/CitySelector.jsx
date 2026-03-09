@@ -2,21 +2,20 @@ export default function CitySelector({ cities, selectedCity, onChange }) {
 
   return (
 
-    <div style={{ marginBottom: "20px" }}>
+    <div className="city-selector">
 
-      <label>Select City: </label>
+      <label className="city-label">Select City</label>
 
       <select
+        className="city-dropdown"
         value={selectedCity}
         onChange={(e) => onChange(e.target.value)}
       >
-
         {cities.map((city, index) => (
           <option key={index} value={city}>
             {city}
           </option>
         ))}
-
       </select>
 
     </div>

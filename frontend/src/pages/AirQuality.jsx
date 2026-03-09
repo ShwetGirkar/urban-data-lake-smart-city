@@ -7,6 +7,7 @@ import { fetchAqiTrend } from "../api/aqiTrendApi";
 import { fetchAqiPrediction } from "../api/aqiPredictionApi";
 import { fetchCityAqi } from "../api/aqiCitiesApi";
 import AqiCityChart from "../components/charts/AqiCityChart";
+import { FaWind } from "react-icons/fa6";
 
 export default function AirQuality() {
 
@@ -51,7 +52,7 @@ export default function AirQuality() {
 
     <div style={{ padding:"20px" }}>
 
-      <h1>Air Quality Analytics</h1>
+      <h2 className="logo"><FaWind style={{marginRight:"10px",color:"#38bdf8"}}/> Air Quality Analytics</h2>
 
       <KpiCards />
 

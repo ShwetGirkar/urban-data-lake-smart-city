@@ -20,14 +20,9 @@ export default function AqiTrendChart({ data }) {
 
   return (
 
-    <div style={{
-      background:"#fff",
-      padding:"20px",
-      borderRadius:"10px",
-      marginTop:"25px"
-    }}>
+    <div className="panel">
 
-      <h3>AQI & PM2.5 — Last 24 Hours</h3>
+      <h3 className="panel-title">AQI & PM2.5 — Last 24 Hours</h3>
 
       <ResponsiveContainer width="100%" height={320}>
 
@@ -41,13 +36,20 @@ export default function AqiTrendChart({ data }) {
               const d = new Date(time);
               return d.getHours().toString().padStart(2,"0")+":00";
             }}
+            stroke="#ffffff"
           />
 
-          <YAxis yAxisId="left" />
+          <YAxis yAxisId="left" stroke="#ffffff"/>
 
           <YAxis yAxisId="right" orientation="right" />
 
-          <Tooltip />
+          <Tooltip
+            contentStyle={{
+            background:"#1e293b",
+            border:"1px solid #334155",
+            color:"#fff"
+                }}
+          />
           <Legend align="center" verticalAlign="bottom" height={36} />
 
           {/* AQI area */}

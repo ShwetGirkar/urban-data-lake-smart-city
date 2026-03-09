@@ -2,30 +2,28 @@ import KpiCards from "../components/kpi/KpiCards";
 import CityMap from "../components/map/CityMap";
 import UrbanStressPanel from "../components/panels/UrbanStressPanel";
 import CityZones from "../components/zones/CityZones";
+import { RiDashboardFill } from "react-icons/ri";
 
 export default function Overview() {
 
   return (
     <div>
 
-      <h1>Smart City Dashboard</h1>
+      <h2 className="logo"><RiDashboardFill style={{marginRight:"10px",color:"#38bdf8"}}/>Smart City Dashboard</h2>
 
       {/* KPI Cards */}
       <KpiCards />
 
       {/* Panel + Map Row */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "320px 1fr",
-          gap: "20px",
-          marginTop: "20px"
-        }}
-      >
+      <div className="overview-grid">
 
-        <UrbanStressPanel />
+      <div className="stress-panel">
+      <UrbanStressPanel />
+      </div>
 
-        <CityMap />
+      <div className="map-panel">
+      <CityMap />
+      </div>
 
       </div>
       <CityZones/>

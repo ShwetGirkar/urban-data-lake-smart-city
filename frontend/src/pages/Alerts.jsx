@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAlerts } from "../api/alertsApi";
 import KpiCards from "../components/kpi/KpiCards";
+import { GoAlertFill } from "react-icons/go";
 
 export default function Alerts() {
 
@@ -22,12 +23,10 @@ export default function Alerts() {
   };
 
   return (
-
+     
     <div style={{ padding: "20px" }}>
+      <h2 className="logo"><GoAlertFill style={{marginRight:"10px",color:"#38bdf8"}}/>Active Alerts </h2>
         <KpiCards/>
-
-      <h2>🚨 Active Alerts </h2>
-
       <table
         style={{
           width: "100%",
@@ -37,8 +36,8 @@ export default function Alerts() {
       >
 
         <thead>
-          <tr style={{ background: "#f3f4f6" }}>
-            <th>#</th>
+          <tr style={{ background: "var(--bg-panel)" }}>
+            <th>No.</th>
             <th>Level</th>
             <th>Type</th>
             <th>City</th>

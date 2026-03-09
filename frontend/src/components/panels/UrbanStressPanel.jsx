@@ -4,11 +4,9 @@ import axios from "axios";
 export default function UrbanStressPanel() {
 
   const [cities, setCities] = useState([]);
-
   useEffect(() => {
     fetchStressCities();
   }, []);
-
   const fetchStressCities = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:8000/api/predict/stress-ranking");
@@ -19,18 +17,10 @@ export default function UrbanStressPanel() {
   };
 
   return (
-    <div style={{
-      background: "#ffffff",
-      padding: "16px",
-      borderRadius: "10px",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-      height: "500px"
-    }}>
-
+    <div className="panel">
       <h3 style={{ marginBottom: "16px" }}>
         Top Urban Stress Cities
       </h3>
-
       {cities.map((city, index) => (
 
         <div key={index}
@@ -41,19 +31,14 @@ export default function UrbanStressPanel() {
             borderRadius: "8px"
           }}
         >
-
          <div style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center"
             }}>
-
         <strong>{city.city}</strong>
-
         <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-
         <span>{Math.round(city.stress_index * 100)}%</span>
-
         <span
         style={{
             padding: "3px 8px",
@@ -76,9 +61,7 @@ export default function UrbanStressPanel() {
         >
         {city.level}
         </span>
-
     </div>
-
     </div>
           {/* Progress Bar */}
           <div style={{

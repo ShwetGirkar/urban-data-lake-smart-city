@@ -4,6 +4,7 @@ import TrafficTrendChart from "../components/charts/TrafficTrendChart";
 import CitySelector from "../components/search/CitySelector";
 import { fetchTrafficTrend } from "../api/trafficTrendApi";
 import PeakCongestion from "../components/charts/PeakCongestion";
+import { FaTrafficLight } from "react-icons/fa";
 
 export default function Traffic() {
 
@@ -37,7 +38,7 @@ export default function Traffic() {
 
     <div style={{ padding:"20px" }}>
 
-      <h1>Traffic Analytics</h1>
+      <h2 className="logo"><FaTrafficLight style={{marginRight:"10px",color:"#38bdf8"}}/> Traffic Analytics</h2>
 
       <KpiCards />
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { searchCity } from "../../api/searchApi";
+import { FaSearchLocation } from "react-icons/fa";
 
 export default function CitySearch({ onSelectCity }) {
 
@@ -35,18 +36,15 @@ export default function CitySearch({ onSelectCity }) {
 
   return (
 
-    <div style={{ marginBottom: "10px" }}>
-
+    <div className="city-search">
+      <FaSearchLocation style={{marginRight:"10px",color:"#38bdf8"}}/>
       <input
-        type="text"
-        placeholder="Search city..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search city..."
+          value={query}
+          onChange={(e)=>setQuery(e.target.value)}
       />
 
-      <button onClick={handleSearch}>
-        Search
-      </button>
+      <button onClick={handleSearch}>Search</button>
 
     </div>
 

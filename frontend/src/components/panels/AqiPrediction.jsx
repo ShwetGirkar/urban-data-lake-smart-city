@@ -4,22 +4,33 @@ export default function AqiPrediction({ data }) {
 
   return (
 
-    <div style={{
-      background:"#fff",
-      padding:"20px",
-      borderRadius:"10px",
-      marginTop:"25px"
-    }}>
+    <div className="panel">
 
-      <h3>AQI Prediction</h3>
+      <h3 className="panel-title">AQI Prediction</h3>
 
-      <p><strong>Latest AQI:</strong> {data.latest_aqi}</p>
+      <div className="prediction-grid">
 
-      <p><strong>Predicted AQI:</strong> {data.predicted_aqi}</p>
+        <div className="prediction-card">
+          <div className="prediction-title">Latest AQI</div>
+          <div className="prediction-value">{data.latest_aqi}</div>
+        </div>
 
-      <p><strong>Risk Level:</strong> {data.risk_level}</p>
+        <div className="prediction-card">
+          <div className="prediction-title">Predicted AQI</div>
+          <div className="prediction-value">{data.predicted_aqi}</div>
+        </div>
 
-      <p><strong>Alert:</strong> {data.alert}</p>
+        <div className="prediction-card">
+          <div className="prediction-title">Risk Level</div>
+          <div className="prediction-value">{data.risk_level}</div>
+        </div>
+
+        <div className="prediction-card">
+          <div className="prediction-title">Alert</div>
+          <div className="prediction-value">{data.alert}</div>
+        </div>
+
+      </div>
 
     </div>
 

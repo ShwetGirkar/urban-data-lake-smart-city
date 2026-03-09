@@ -18,14 +18,9 @@ export default function AqiCityChart({ data }) {
 
   return (
 
-    <div style={{
-      background:"#fff",
-      padding:"20px",
-      borderRadius:"10px",
-      marginBottom:"25px"
-    }}>
+    <div className="panel">
 
-      <h3>AQI Trend Across Cities</h3>
+      <h3 className="panel-title">AQI Trend Across Cities</h3>
 
       <ResponsiveContainer width="100%" height={300}>
 
@@ -33,11 +28,17 @@ export default function AqiCityChart({ data }) {
 
           <CartesianGrid strokeDasharray="3 3" />
 
-          <XAxis dataKey="city" />
+          <XAxis dataKey="city" stroke="#ffffff" />
 
-          <YAxis domain={[0,500]} />
+          <YAxis domain={[0,500]} stroke="#ffffff" />
 
-          <Tooltip />
+          <Tooltip
+            contentStyle={{
+            background:"#1e293b",
+            border:"1px solid #334155",
+            color:"#fff"
+                }}
+          />
           <Legend align="center" verticalAlign="bottom" height={36} />
           <Line
             type="monotone"

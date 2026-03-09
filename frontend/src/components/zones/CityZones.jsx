@@ -22,7 +22,7 @@ export default function CityZones() {
     if (risk === "Good") return "#28a745";
     if (risk === "Satisfactory") return "#17a2b8";
     if (risk === "Moderate") return "#ffc107";
-    return "#dc3545";
+    return "#f35060";
   };
 
   return (
@@ -32,50 +32,37 @@ export default function CityZones() {
         City Zones – AQI vs Congestion
       </h2>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: "16px"
-        }}
-      >
+      <div className="zones-grid">
 
         {cities.map((city, index) => (
 
           <div
             key={index}
-            style={{
-              background: "#fff",
-              padding: "16px",
-              borderRadius: "10px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-            }}
-          >
+            className="zone-card"
+            >
 
             <h4>{city.city}</h4>
 
             {/* AQI */}
             <div style={{ marginTop: "6px" }}>
               AQI <strong>{city.aqi}</strong>
-
               <span
                 style={{
-                  marginLeft: "8px",
-                  padding: "2px 8px",
-                  borderRadius: "6px",
-                  fontSize: "12px",
-                  background: "#eee"
-                }}
+                marginLeft: "8px",
+                padding: "2px 8px",
+                borderRadius: "6px",
+                fontSize: "12px",
+                background: getRiskColor(city.risk_level),
+                color: "#fff"
+              }}
               >
                 {city.risk_level}
               </span>
             </div>
-
             {/* Congestion */}
             <div style={{ marginTop: "10px" }}>
               Congestion {Math.round(city.congestion_ratio * 100)}%
             </div>
-
             {/* Progress Bar */}
             <div
               style={{
@@ -89,7 +76,7 @@ export default function CityZones() {
                 style={{
                   width: `${city.congestion_ratio * 100}%`,
                   height: "100%",
-                  background: "#1f2937",
+                  background: "#db2222",
                   borderRadius: "5px"
                 }}
               />

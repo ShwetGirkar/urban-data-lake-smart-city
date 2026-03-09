@@ -55,14 +55,20 @@ export default function CityMap() {
   <div>
 
     {/* Search Bar */}
-    <CitySearch onSelectCity={zoomToCity}/>
+    <div className="map-header">
+
+    <span>City Map</span>
+
+    <CitySearch onSelectCity={zoomToCity} />
+
+    </div>
 
     <MapContainer
       center={[22.9734, 78.6569]}
       zoom={5}
       minZoom={5}
       maxBounds={indiaBounds}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: "520px", width: "100%" , borderRadius:"10px"}}
       ref={mapRef}
     >
 
@@ -95,7 +101,6 @@ export default function CityMap() {
 
         </CircleMarker>
       ))}
-
     </MapContainer>
 
   </div>

@@ -7,16 +7,9 @@ export default function PeakCongestion({ data }) {
 
   return (
 
-    <div
-      style={{
-        background: "#fff",
-        padding: "20px",
-        borderRadius: "10px",
-        marginTop: "25px"
-      }}
-    >
+    <div className="panel">
 
-      <h3>Peak Congestion (Top 5 Hours)</h3>
+      <h3 className="panel-title">Peak Congestion (Top 5 Hours)</h3>
 
       {sortedData.map((item, index) => {
 
@@ -25,23 +18,26 @@ export default function PeakCongestion({ data }) {
 
         return (
 
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "8px 0",
-              borderBottom: "1px solid #eee"
-            }}
-          >
+      <div key={index} className="peak-row">
 
-            <span>{hour}:00</span>
+      <span className="peak-time">{hour}:00</span>
 
-            <strong>
-              {(item.congestion_ratio * 100).toFixed(0)}%
-            </strong>
+        <div className="peak-bar-wrapper">
+
+        <div
+          className="peak-bar"
+          style={{
+          width: `${item.congestion_ratio * 100}%`
+          }}
+          ></div>
 
           </div>
+
+        <span className="peak-value">
+            {(item.congestion_ratio * 100).toFixed(0)}%
+        </span>
+
+      </div>
 
         );
 

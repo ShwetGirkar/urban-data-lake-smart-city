@@ -1,16 +1,47 @@
-export default function DashboardLayout({ children }) {
+import { Link, Outlet } from "react-router-dom";
+import { FaDatabase } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+
+export default function DashboardLayout() {
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Urban Data Lake: Real Time Smart City Data Platform</h2>
 
-      <nav style={{ marginBottom: "20px" }}>
-        <a href="/">Overview</a> |{" "}
-        <a href="/air-quality">Air Quality</a> |{" "}
-        <a href="/traffic">Traffic</a> |{" "}
-        <a href="/alerts">Alerts</a>
-      </nav>
+    <div>
 
-      {children}
+      {/* NAVBAR */}
+
+      <div className="navbar">
+
+    <div className="navbar-inner">
+
+      <h1 className="logo">
+      <FaDatabase style={{marginRight:"10px",color:"#38bdf8"}}/>
+      Urban Data Lake: Real-Time Smart City Data Platform
+      </h1>
+
+      <div className="dashboard-tabs">
+
+      <NavLink to="/">Overview</NavLink>
+      <NavLink to="/air-quality">Air Quality</NavLink>
+      <NavLink to="/traffic">Traffic</NavLink>
+      <NavLink to="/alerts">Alerts</NavLink>
+
+      </div>
+
+      </div>
+
+      </div>
+
+      {/* PAGE CONTENT */}
+
+      <div className="page">
+
+        <Outlet />
+
+      </div>
+
     </div>
+
   );
+
 }

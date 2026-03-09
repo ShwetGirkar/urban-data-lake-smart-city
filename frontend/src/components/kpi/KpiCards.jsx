@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchSummary } from "../../api/summaryApi";
 
-import { FaSmog } from "react-icons/fa";
+import { FaAlignLeft, FaAlignRight, FaSmog } from "react-icons/fa";
 import { FaTrafficLight } from "react-icons/fa";
 import { WiDaySunny } from "react-icons/wi";
 import { FaExclamationTriangle } from "react-icons/fa";
@@ -22,7 +22,7 @@ export default function KpiCards() {
   if (!summary) return <p>Loading dashboard...</p>;
 
     return (
-    <div className="kpi-container">
+    <div className="kpi-grid">
 
         <div className="kpi-card">
         <div className="kpi-header">
@@ -68,7 +68,7 @@ export default function KpiCards() {
         <div className="kpi-value">
          {new Date(summary.last_updated).toLocaleTimeString()}
         </div>
-        <div className="kpi-sub">System Time</div>
+        
         </div>
 
     </div>
