@@ -1,7 +1,7 @@
 export default function DashboardLayout({ children }) {
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Urban Data Lake</h2>
+      <h2>Urban Data Lake: Real Time Smart City Data Platform</h2>
 
       <nav style={{ marginBottom: "20px" }}>
         <a href="/">Overview</a> |{" "}

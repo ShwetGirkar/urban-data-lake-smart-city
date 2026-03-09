@@ -30,8 +30,6 @@ export default function Overview() {
       </div>
       <CityZones/>
 
-      <p>Overview Page</p>
-
     </div>
   );
 }
