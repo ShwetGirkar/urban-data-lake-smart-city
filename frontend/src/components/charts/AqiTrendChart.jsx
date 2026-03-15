@@ -13,10 +13,7 @@ import {
 export default function AqiTrendChart({ data }) {
 
   // scale AQI for visualization
-  const chartData = data.map(d => ({
-    ...d,
-    aqi_scaled: d.aqi * 25
-  }));
+  const chartData = data;
 
   return (
 
@@ -56,7 +53,7 @@ export default function AqiTrendChart({ data }) {
           <Area
             yAxisId="left"
             type="monotone"
-            dataKey="aqi_scaled"
+            dataKey="aqi"
             stroke="#2563eb"
             fill="#93c5fd"
             name="AQI"

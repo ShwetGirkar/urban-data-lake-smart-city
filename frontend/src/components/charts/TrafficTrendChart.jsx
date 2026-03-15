@@ -42,7 +42,7 @@ export default function TrafficTrendChart({ data }) {
             yAxisId="left"
             dataKey="congestion_ratio"
             fill="#111"
-            name="Cnogestion"
+            name="Congestion"
           />
 
           <Line

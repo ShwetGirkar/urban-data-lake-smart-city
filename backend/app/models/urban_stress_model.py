@@ -27,23 +27,28 @@ def calculate_urban_stress(city_name: str):
     aqi_city = aqi_df[aqi_df["city_clean"] == city_name_clean]
     weather_city = weather_df[weather_df["city_clean"] == city_name_clean]
 
-    traffic_row = traffic_city.iloc[-1]
-    aqi_row = aqi_city.iloc[-1]
-    weather_row = weather_city.iloc[-1]
+    traffic_row = traffic_city.sort_values("timestamp").iloc[-1]
+    aqi_row = aqi_city.sort_values("timestamp").iloc[-1]
+    weather_row = weather_city.sort_values("timestamp").iloc[-1]
 
     # traffic score
-    traffic_congestion = 1 - (
-        traffic_row["current_speed_kmh"] / traffic_row["free_flow_speed_kmh"]
-    )
+    free_flow = traffic_row["free_flow_speed_kmh"]
+
+    if free_flow > 0:
+        traffic_congestion = 1 - (traffic_row["current_speed_kmh"] / free_flow)
+    else:
+        traffic_congestion = 0
+
+    traffic_congestion = max(0, min(traffic_congestion, 1))
 
     traffic_score = float(traffic_congestion)
 
     # pollution score
     pollution_score = float(aqi_row["aqi"]) / 500
-
+    pollution_score = min(pollution_score, 1)
     # weather score
     temp = weather_row["temperature_c"]
-    weather_score = abs(temp - 22) / 20
+    weather_score = abs(temp - 22) / 15
     weather_score = min(weather_score, 1)
 
     # calculate urban stress

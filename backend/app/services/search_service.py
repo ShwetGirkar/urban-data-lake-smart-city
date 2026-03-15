@@ -20,15 +20,61 @@ def search_location(query: str):
     # 1️⃣ Check if exists in dataset
     if query_clean in df["city_clean"].values:
         city_df = df[df["city_clean"] == query_clean]
+
         enriched = enrich_city_data(city_df)
+
         return {"source": "dataset", "data": enriched.to_dict(orient="records")[0]}
 
-    # 2️⃣ If not found → live fetch
+    # If not found → live fetch
     return live_fetch(query)
 
 
 OPENWEATHER_API_KEY = os.getenv("OWM_API_KEY")
 TOMTOM_API_KEY = os.getenv("TOMTOM_API_KEY")
+
+PM25_BREAKPOINTS = [
+    (0.0, 12.0, 0, 50),
+    (12.1, 35.4, 51, 100),
+    (35.5, 55.4, 101, 150),
+    (55.5, 150.4, 151, 200),
+    (150.5, 250.4, 201, 300),
+    (250.5, 350.4, 301, 400),
+    (350.5, 500.4, 401, 500),
+]
+
+PM10_BREAKPOINTS = [
+    (0, 54, 0, 50),
+    (55, 154, 51, 100),
+    (155, 254, 101, 150),
+    (255, 354, 151, 200),
+    (355, 424, 201, 300),
+    (425, 504, 301, 400),
+    (505, 604, 401, 500),
+]
+
+
+def calculate_aqi(concentration, breakpoints):
+    for bp_lo, bp_hi, aqi_lo, aqi_hi in breakpoints:
+        if bp_lo <= concentration <= bp_hi:
+            return round(
+                ((aqi_hi - aqi_lo) / (bp_hi - bp_lo)) * (concentration - bp_lo) + aqi_lo
+            )
+    return None
+
+
+def compute_us_aqi(components):
+    pm25 = components.get("pm2_5")
+    pm10 = components.get("pm10")
+
+    pm25_aqi = calculate_aqi(pm25, PM25_BREAKPOINTS) if pm25 else None
+    pm10_aqi = calculate_aqi(pm10, PM10_BREAKPOINTS) if pm10 else None
+
+    values = [v for v in [pm25_aqi, pm10_aqi] if v is not None]
+
+    if not values:
+        return None
+
+    return max(values)
 
 
 def live_fetch(query: str):
@@ -81,9 +127,11 @@ def live_fetch(query: str):
 
     congestion_ratio = current_speed / free_speed
 
-    aqi_value = aqi["list"][0]["main"]["aqi"]
+    components = aqi["list"][0]["components"]
 
-    stress_score = (aqi_value / 5) * 0.6 + (1 - congestion_ratio) * 0.4
+    aqi_value = compute_us_aqi(components)
+
+    stress_score = (aqi_value / 500) * 0.6 + (1 - congestion_ratio) * 0.4
 
     return {
         "source": "live",

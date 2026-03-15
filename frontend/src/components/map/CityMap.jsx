@@ -44,13 +44,13 @@ export default function CityMap() {
     loadCities();
     }, []);
   const getAQIColor = (aqi) => {
-  if (aqi === 1) return "#22c55e"; // green
-  if (aqi === 2) return "#84cc16"; // light green
-  if (aqi === 3) return "#eab308"; // yellow
-  if (aqi === 4) return "#f97316"; // orange
-  return "#ef4444"; // red (5)
-    };
-
+  if (aqi <= 50) return "#22c55e";        // Good (green)
+  if (aqi <= 100) return "#ffff00d5";       // Moderate (Yellow)
+  if (aqi <= 150) return "#f97416";       // Unhealthy for Sensitive (orange)
+  if (aqi <= 200) return "#ef4444";       // Unhealthy (red)
+  if (aqi <= 300) return "#8b5cf6";       // Very Unhealthy (purple)
+  return "#7f1d1d";                       // Hazardous (maroon)
+  };
   return (
   <div>
 

@@ -13,7 +13,7 @@ import {
 export default function AqiCityChart({ data }) {
     const chartData = data.map(d => ({
     ...d,
-    aqi_real: d.aqi * 75
+    aqi_real: d.aqi 
     }));
 
   return (

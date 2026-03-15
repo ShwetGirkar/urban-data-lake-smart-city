@@ -22,12 +22,12 @@ def predict_peak_hours(city_name: str):
 
     # change when we have 3 days worth of data
 
-    # cutoff_time = datetime.now() - timedelta(days=3)
+    # cutoff_time = datetime.now() - timedelta(hours=48)
 
     # recent_df = city_df[city_df["timestamp"] >= cutoff_time].copy()
     recent_df = city_df.copy()
 
-    recent_df["congestion"] = 1 - (
+    recent_df["congestion"] = (
         recent_df["current_speed_kmh"] / recent_df["free_flow_speed_kmh"]
     )
     recent_df["hour"] = recent_df["timestamp"].dt.hour
